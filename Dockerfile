@@ -9,6 +9,10 @@ RUN apt update \
 ADD ./ynov-bootcamp-tp-vuln-python/ /chall
 WORKDIR /chall
 
+RUN chown -R www-data:www-data .
+
+USER www-data
+
 EXPOSE 5000
 
 CMD bash -c "source start_app.sh"
