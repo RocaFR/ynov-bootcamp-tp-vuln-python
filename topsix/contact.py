@@ -4,9 +4,13 @@ from flask import render_template
 
 UPLOAD_DIR = "uploads/"
 ALLOWED_EXTENSIONS = {"jpg", "jpeg", "pdf", "png"}
+NOT_ALLOWED_EXTENSIONS = {"Php", "PHp", "PHP", "php","pHp","phP","PhP"}
 
 def is_file_allowed(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    first = '.' in filename
+    second = filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    third = not filename.rsplit('.', 1)[1].lower() in NOT_ALLOWED_EXTENSIONS
+    return first and second and third
 
 def handle_file_saving(file: FileStorage):
     file = file
