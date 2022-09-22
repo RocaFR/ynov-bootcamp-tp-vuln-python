@@ -55,7 +55,7 @@
 		<section id="contact">
 			<div class="inner">
 				<section>
-					<form method="post" action="/contact">
+					<form method="post" action="/contact" enctype=multipart/form-data>
 						<div class="fields">
 							<div class="field half">
 								<label for="name">Name</label>
@@ -68,6 +68,10 @@
 							<div class="field">
 								<label for="message">Message</label>
 								<textarea name="message" id="message" rows="6"></textarea>
+							</div>
+							<div class="field">
+								<label for="file">Un fichier à nous transmettre ?</label>
+								<input type="file" name="file" id="file" />
 							</div>
 						</div>
 						<ul class="actions">

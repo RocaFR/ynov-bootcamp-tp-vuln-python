@@ -1,19 +1,25 @@
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template, request
+from contact import *
 
 app = Flask(__name__)
 
-# à utiliser pour échapper les caractères non autorisés {escape(name)}
-
+# PAGE INDEX
 @app.route("/")
 @app.route("/#")
 def index():
     return render_template("index.html")
 
+# PAGE CONTACT
+# gestion de l'upload de fichier
+
 @app.route("/contact/", methods=['GET', 'POST'])
 def contact():
-    return render_template("contact.html")
+    if request.method == "POST":
+        return handle_file_upload(request.files['file'])
+    else:
+        return render_template("contact.html")
 
+# PAGE LOGIN
 @app.route("/login/", methods=['GET', 'POST'])
 def login():
     return render_template("login.html")
