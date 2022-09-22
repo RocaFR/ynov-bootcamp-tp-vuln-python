@@ -3,23 +3,21 @@ from contact import *
 
 app = Flask(__name__)
 
-# PAGE INDEX
+# INDEX
 @app.route("/")
 @app.route("/#")
 def index():
     return render_template("index.html")
 
-# PAGE CONTACT
-# gestion de l'upload de fichier
-
+# CONTACT
 @app.route("/contact/", methods=['GET', 'POST'])
 def contact():
     if request.method == "POST":
-        return handle_file_upload(request.files['file'])
+        return handle_post(request.files['file'], request.form["name"], request.form["email"])
     else:
         return render_template("contact.html")
 
-# PAGE LOGIN
+# LOGIN
 @app.route("/login/", methods=['GET', 'POST'])
 def login():
     return render_template("login.html")

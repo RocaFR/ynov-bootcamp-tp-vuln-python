@@ -31,7 +31,6 @@
 				<li><a href="/login/">Login</a></li>
 				<li><a href="/contact/">Contact</a></li>
 			</ul>
-			
 		</nav>
 		
 		<!-- Banner -->
@@ -42,11 +41,8 @@
 					<img src="images/pic07.jpg" alt="" />
 				</span>
 				<header class="major">
-					<h1>Contact</h1>
+					<h1>Remerciements</h1>
 				</header>
-				<div class="content">
-					<p>Pour nous contacter c'est par ici !</p>
-				</div>
 			</div>
 		</section>
 		
@@ -55,30 +51,8 @@
 		<section id="contact">
 			<div class="inner">
 				<section>
-					<form method="post" action="/contact" enctype=multipart/form-data>
-						<div class="fields">
-							<div class="field half">
-								<label for="name">Name</label>
-								<input type="text" name="name" id="name" required/>
-							</div>
-							<div class="field half">
-								<label for="email">Email</label>
-								<input type="text" name="email" id="email" required/>
-							</div>
-							<div class="field">
-								<label for="message">Message</label>
-								<textarea name="message" id="message" rows="6" required></textarea>
-							</div>
-							<div class="field">
-								<label for="file">Un fichier à nous transmettre ?</label>
-								<input type="file" name="file" id="file" />
-							</div>
-						</div>
-						<ul class="actions">
-							<li><input type="submit" value="Send Message" class="primary" /></li>
-							<li><input type="reset" value="Clear" /></li>
-						</ul>
-					</form>
+					<p>Nous vous remercions {{ name }} de nous avoir contacté.<br>
+					Nous revenons vers vous au plus vite sur {{ email }}</p>
 				</section>
 				<section class="split">
 					<section>
