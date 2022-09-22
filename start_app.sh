@@ -1,6 +1,5 @@
 #!/bin/bash
-cd topsix
 deactivate
-source `pwd`/venv/bin/activate;
-
+source /venv/bin/activate;
+cd topsix
 flask --debug run
