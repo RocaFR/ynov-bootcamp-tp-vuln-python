@@ -1,18 +1,21 @@
 FROM ubuntu:22.04
 
 RUN apt update \
+&& apt install wget -yq \
+&& apt install gcc -yq \
 && apt install python3 -yq \
 && apt install python3-pip -yq \
-&& apt clean -y \
-&& pip3 install flask
+&& pip3 install flask \
+&& apt clean -y
 
-ADD ./ynov-bootcamp-tp-vuln-python/ /chall
-WORKDIR /chall
+ADD ./topsix /app
+WORKDIR /app
 
-RUN chown -R www-data:www-data .
+RUN chown -R www-data:www-data .\
+&& mkdir uploads
 
 USER www-data
 
 EXPOSE 5000
 
-CMD bash -c "source start_app.sh"
+CMD bash -c "flask run -h 0.0.0.0"
