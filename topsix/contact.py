@@ -6,10 +6,16 @@ UPLOAD_DIR = "uploads/"
 ALLOWED_EXTENSIONS = {"jpg", "jpeg", "pdf", "png"}
 NOT_ALLOWED_EXTENSIONS = {"Php", "PHp", "PHP", "php","pHp","phP","PhP"}
 
+def no_php_allowed(filename):
+    for f in  filename.rsplit('.', 1) :
+        if(f in NOT_ALLOWED_EXTENSIONS):
+            return False
+    return True
+
 def is_file_allowed(filename):
     first = '.' in filename
     second = filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-    third = not filename.rsplit('.', 1)[1].lower() in NOT_ALLOWED_EXTENSIONS
+    third = no_php_allowed(filename)
     return first and second and third
 
 def handle_file_saving(file: FileStorage):
