@@ -1,0 +1,11 @@
+#Verification
+
+Dans conf/nginx-docker/certs/
+Generer ses certificat en faisant: sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ctf.key -out ctf.crt
+
+docker-compose build
+docker-compose up
+
+#Fond de tache
+docker-compose up -d
+

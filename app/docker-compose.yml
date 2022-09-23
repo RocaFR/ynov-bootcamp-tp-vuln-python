@@ -1,0 +1,40 @@
+version: '2.0'
+
+services:
+  web:
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./conf/dockerfiles/python/Dockerfile
+    image: webctf
+    hostname: ctf.ao
+    volumes:
+     - ./front/python/:/app
+    env_file:
+      .env
+    networks:
+      projet_ynov:
+        aliases:
+         - web.flaskapp
+         - web
+
+  proxy:
+    build:
+      context: ./
+      dockerfile: ./conf/dockerfiles/nginx/Dockerfile
+    image: nginxctf
+    restart: always
+    volumes:
+     - ./conf/confng/nginx-docker/:/etc/nginx/
+    ports:
+     - "81:80"
+     - "1337:443"
+    networks:
+      projet_ynov:
+        aliases:
+         - proxy.flaskapp
+         - proxy
+
+networks:
+  projet_ynov:
+    driver: bridge
