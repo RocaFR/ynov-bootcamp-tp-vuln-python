@@ -11,8 +11,8 @@ RUN apt update \
 ADD ./topsix /app
 WORKDIR /app
 
-RUN chown -R www-data:www-data .\
-&& mkdir uploads
+RUN mkdir uploads \
+&& chown -R www-data:www-data .
 
 USER www-data
 
