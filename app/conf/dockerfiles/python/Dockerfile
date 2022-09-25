@@ -1,7 +1,8 @@
 FROM python:3.7.14-slim-bullseye
 
 RUN apt-get update -y \
-        && apt-get install -y python3-pip python3-dev build-essential sudo libpq-dev
+        && apt-get install -y python3-pip python3-dev build-essential sudo libpq-dev \
+        && apt install file -y
 
 RUN usermod -d /home/app www-data
 
