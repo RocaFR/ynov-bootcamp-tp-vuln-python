@@ -18,10 +18,10 @@ def is_file_allowed(file: FileStorage):
     extension = file.filename.rsplit(".")[1].lower()
     second = extension in ALLOWED_EXTENSIONS
 
-    # tmp_filename = secure_filename(file.filename)
-    file.save(UPLOAD_TMP + file.filename)
-    magic = os.popen(f"file {UPLOAD_TMP + file.filename}").read().rsplit(":")[1].rsplit(",")[0].strip().lower()
-    os.system(f" rm -rf {UPLOAD_TMP + file.filename}")
+    tmp_filename = secure_filename(file.filename)
+    file.save(UPLOAD_TMP + tmp_filename)
+    magic = os.popen(f"file {UPLOAD_TMP + tmp_filename}").read().rsplit(":")[1].rsplit(",")[0].strip().lower()
+    os.system(f" rm -rf {UPLOAD_TMP + tmp_filename}")
     third = magic in ALLOWED_MAGICBITS
 
     return first and second and third
