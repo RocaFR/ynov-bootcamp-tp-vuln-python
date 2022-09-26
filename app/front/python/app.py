@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, request
-#from flask_user import roles_required
+from flask import Flask, request
+
+# from flask_user import roles_required
 from config import BaseConfig
 from contact import *
 
-
 app = Flask(__name__)
 app.config.from_object(BaseConfig)
-
 
 
 # INDEX
@@ -17,6 +16,7 @@ app.config.from_object(BaseConfig)
 def index():
     return render_template("index.html")
 
+
 # CONTACT
 @app.route("/contact/", methods=['GET', 'POST'])
 def contact():
@@ -24,6 +24,7 @@ def contact():
         return handle_post(request.files['file'], request.form["name"], request.form["email"])
     else:
         return render_template("contact.html")
+
 
 # LOGIN
 @app.route("/login/", methods=['GET', 'POST'])
