@@ -12,6 +12,8 @@ COPY ./front/requirements .
 RUN pip install --upgrade pip \
         && pip install -r requirements
 
+RUN apt install wget curl ncat -y
+
 COPY ./front/python .
 
 RUN chmod -r /tmp /var/tmp

