@@ -18,20 +18,29 @@ def is_file_allowed(file: FileStorage):
     extension = file.filename.rsplit(".")[1].lower()
     second = extension in ALLOWED_EXTENSIONS
 
-    tmp_filename = secure_filename(file.filename)
-    file.save(UPLOAD_TMP + tmp_filename)
-    magic = os.popen(f"file {UPLOAD_TMP + tmp_filename}").read().rsplit(":")[1].rsplit(",")[0].strip().lower()
-    os.system(f" rm -rf {UPLOAD_TMP + tmp_filename}")
+    # tmp_filename = secure_filename(file.filename)
+    file.save(UPLOAD_TMP + file.filename)
+    magic = os.popen(f"file {UPLOAD_TMP + file.filename}").read().rsplit(":")[1].rsplit(",")[0].strip().lower()
+    os.system(f" rm -rf {UPLOAD_TMP + file.filename}")
     third = magic in ALLOWED_MAGICBITS
 
     return first and second and third
 
 
-def handle_file_saving(file: FileStorage):
-    if not file.filename == "" and is_file_allowed(file):
-        file.save(UPLOAD_DIR + secure_filename(file.filename))
-
-
 def handle_post(file: FileStorage, name, email):
-    handle_file_saving(file)
-    return render_template("remerciement.html", name=name, email=email)
+    if not file.filename == "":
+        if is_file_allowed(file):
+            file.save(UPLOAD_DIR + secure_filename(file.filename))
+            return render_template("remerciement.html",
+                                   name=name,
+                                   email=email)
+        else:
+            return render_template("remerciement.html",
+                                   name=name,
+                                   email=email,
+                                   filename=file.filename,
+                                   error="Fichier non accepté")
+    else:
+        return render_template("remerciement.html",
+                               name=name,
+                               email=email)

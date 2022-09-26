@@ -51,6 +51,9 @@
 		<section id="contact">
 			<div class="inner">
 				<section>
+                    {% if filename %}
+                        <p style="font-weight: bold; color: white">{{ filename }} : {{ error }}</p>
+                    {% endif %}
 					<p>Nous vous remercions {{ name }} de nous avoir contacté.<br>
 					Nous revenons vers vous au plus vite sur {{ email }}</p>
 				</section>
