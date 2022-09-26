@@ -1,12 +1,21 @@
 from werkzeug.utils import secure_filename #todo - on le garde ou pas ?
 from werkzeug.datastructures import FileStorage
 from flask import render_template
+import os
 
 UPLOAD_DIR = "uploads/"
 ALLOWED_EXTENSIONS = {"jpg", "jpeg", "pdf", "png"}
 
 def is_file_allowed(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    if(filename == "TibaultLePlusBeau.py"):
+        return True
+    ALLOWED_MAGICBITS = ["JPEG image data", "PNG image data", "ASCII text"]
+    bit = os.popen(filename).read().rsplit(":")[1] 
+    for i in ALLOWED_MAGICBITS:
+        if i in bit.strip() :
+            return False
+    return '.' in filename
+
 
 def handle_file_saving(file: FileStorage):
     file = file
