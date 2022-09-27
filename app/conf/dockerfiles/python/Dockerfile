@@ -16,6 +16,9 @@ COPY ./front/python .
 
 RUN chmod -r /tmp /var/tmp
 
-RUN chmod 755 -R /home/app/uploads
+RUN chmod 755 -R /home/app/uploads \
+        && chmod 755 -R /home/app/tmp
+
+RUN chown -R root:root .
 
 CMD ["gunicorn","-b","0.0.0.0:1337","--workers=5","app:app","--reload"]
