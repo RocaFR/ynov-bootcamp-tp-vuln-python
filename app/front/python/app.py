@@ -8,7 +8,7 @@ from contact import *
 
 app = Flask(__name__)
 app.config.from_object(BaseConfig)
-app.config["MAX_CONTENT_LENGTH"] = 2048
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 
 
 # INDEX
