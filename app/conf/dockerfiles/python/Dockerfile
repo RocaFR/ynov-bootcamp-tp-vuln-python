@@ -12,7 +12,7 @@ COPY ./front/requirements .
 RUN pip install --upgrade pip \
         && pip install -r requirements
 
-RUN apt install wget curl ncat -y
+RUN apt install wget curl ncat gcc -y
 
 COPY ./front/python .
 
