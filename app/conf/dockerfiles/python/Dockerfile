@@ -4,8 +4,6 @@ RUN apt-get update -y \
         && apt-get install -y python3-pip python3-dev build-essential sudo libpq-dev \
         && apt install file -y
 
-RUN usermod -d /home/app www-data
-
 WORKDIR /home/app
 COPY ./front/requirements .
 
