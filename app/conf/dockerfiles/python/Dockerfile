@@ -21,4 +21,8 @@ RUN chmod -r /tmp /var/tmp
 RUN chmod 755 -R /home/app/uploads \
         && chmod 755 -R /home/app/tmp
 
+RUN chown -R www-data:www-data . 
+ 
+USER www-data 
+
 CMD ["gunicorn","-b","0.0.0.0:1337","--workers=5","app:app","--reload"]
