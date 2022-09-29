@@ -1,4 +1,4 @@
-FROM python:3.7.14-slim-bullseye
+FROM python:3.6.15-slim-bullseye
 
 RUN apt-get update -y \
         && apt-get install -y python3-pip python3-dev build-essential sudo libpq-dev \
