@@ -1,4 +1,4 @@
-FROM python:3.6.15-slim-bullseye
+FROM python:3.7.14-buster
 
 RUN apt-get update -y \
         && apt-get install -y python3-pip python3-dev build-essential sudo libpq-dev \
@@ -13,8 +13,6 @@ RUN pip install --upgrade pip \
         && pip install -r requirements
 
 COPY ./front/python .
-
-RUN chmod -r /tmp /var/tmp
 
 RUN chmod 755 -R /home/app/uploads \
         && chmod 755 -R /home/app/tmp
